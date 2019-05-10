@@ -5,7 +5,7 @@ var backCamID;
 navigator.mediaDevices.enumerateDevices()
 .then(function(devices) {
   devices.forEach(function(device) {
-    //alert( JSON.stringify(device) );
+    alert( JSON.stringify(device) );
     if( device.kind == "videoinput" && device.label.match(/back/) != null ){
       //alert("Back found!");
       backCamID = device.deviceId;
@@ -105,8 +105,7 @@ var App = {
                 constraints: {
                     width: 600,
                     height: 600,
-                    deviceId: backCamID
-                    // facingMode: "environment"
+                    facingMode: "environment"
                 }
             });
         return scanner;
