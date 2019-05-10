@@ -1,14 +1,12 @@
 var Quagga = window.Quagga;
 
-var backCamID;
-
 navigator.mediaDevices.enumerateDevices()
 .then(function(devices) {
+  var cameras = document.getElementById('cameras');
+    
   devices.forEach(function(device) {
-    alert( JSON.stringify(device) );
-    if( device.kind == "videoinput" && device.label.match(/back/) != null ){
-      //alert("Back found!");
-      backCamID = device.deviceId;
+    if( device.kind == "videoinput" ){
+        cameras.options[cameras.options.length] = new Option(device.label || cameras.options.length, device.deviceId);
     }
   });
 })
@@ -105,7 +103,7 @@ var App = {
                 constraints: {
                     width: 600,
                     height: 600,
-                    facingMode: "environment"
+                    deviceId: document.getElementById('cameras').options[document.getElementById('cameras').options.selectedIndex].value
                 }
             });
         return scanner;
